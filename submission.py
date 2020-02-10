@@ -1,3 +1,5 @@
+import random
+
 class Solution:
 
         # 1
@@ -270,6 +272,83 @@ class Solution:
         counter = 2
         number = 6
 
+        #6
+        #This function decides who is going to be the winner
+        #I used python random library to randomly generate the users stones to pick(either 1, 2 or 3)
+        def Stones(self,total):
+
+            temp = total
+
+            p_moves = []
+            first_flag = 1
+            while temp != 0:
+
+                if first_flag == 1:
+
+                    p1 = random.randint(1, 3)
+                    p_moves.append('ONE')
+
+                    p_moves.append(p1)
+                    p2 = random.randint(1, 3)
+                    p_moves.append('TWO')
+                    p_moves.append(p2)
+
+                    first_flag = 0
+
+                # if temp-p2 > 0:
+                if temp - p1 == 0:
+
+                    p_moves.pop()
+                    p_moves.pop()
+                    # print(p_moves)
+                    break
+                elif temp - p1 < 0:
+                    p_moves.pop()
+                    p_moves.pop()
+
+                    p1 = random.randint(1, p1 - temp)
+
+                    temp = temp - p1
+                    p_moves.append('ONE')
+                    p_moves.append(p1)
+                    continue
+                else:
+                    temp = temp - p1
+
+                    p1 = random.randint(1, 3)
+                    p_moves.append('ONE')
+                    p_moves.append(p1)
+
+
+                if temp - p2 == 0:
+
+                    p_moves.pop()
+                    p_moves.pop()
+
+                    break
+                elif temp - p2 < 0:
+                    p_moves.pop()
+                    p_moves.pop()
+                    p2 = random.randint(1, p2 - temp)
+
+                    temp = temp - p2
+                    p_moves.append('TWO')
+                    p_moves.append(p2)
+                    continue
+                else:
+                    temp = temp - p2
+                    p2 = random.randint(1, 3)
+                    p_moves.append('TWO')
+                    p_moves.append(p2)
+            print(p_moves)
+
+
+
+
+
+
+
+
 ip = ["abcd", "dcba", "lls", "s", "sssll"]
 
 
@@ -292,6 +371,10 @@ obj.Series_Printer(number)
 
 #3
 obj.usf_time()
+
+#6
+total = 5
+obj.Stones(total)
 
 #1
 number_one = input('Enter an integer greater than 0')
